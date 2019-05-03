@@ -8,5 +8,5 @@ for i in 1..<n
 {
     fact = fact * i
 }
-print("Factorial of ",number," is: ", fact)
+print("Factorial of ",number,"=", fact)
 
