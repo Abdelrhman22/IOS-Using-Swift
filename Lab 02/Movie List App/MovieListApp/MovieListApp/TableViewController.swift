@@ -78,7 +78,7 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         
         // Configure the cell...
         cell.textLabel?.text = movies[indexPath.row].title
-        cell.imageView?.image=UIImage(named: movies[indexPath.row].image)
+        //cell.imageView?.image=UIImage(named: movies[indexPath.row].image)
         return cell
     }
     func addMovie(movie : Movie)
