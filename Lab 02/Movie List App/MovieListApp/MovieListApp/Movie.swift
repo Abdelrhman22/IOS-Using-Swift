@@ -9,7 +9,7 @@
 import UIKit
 
 class Movie: NSObject
-{
+{  
     var title : String = "name";
     var image : String = "";
     var genre : [String]?;
