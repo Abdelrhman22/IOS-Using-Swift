@@ -22,8 +22,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("did load");
         titleField.text = movie.title;
         ratingField.text = String(movie.rating);
         yearField.text = String(movie.releaseDate);
@@ -32,7 +30,6 @@ class ViewController: UIViewController {
             genreField.text.append((movie.genre?[x])!);
             genreField.text.append("\n");
         }
-        print("image "+movie.image);
         imageView.image = UIImage(named : movie.image+".jpg");
     }
     
@@ -43,10 +40,7 @@ class ViewController: UIViewController {
      
     func setMovie( mov : Movie )
     {
-        print("setMovie\n");
         movie = mov;
-        print(mov.title);
-        print(movie.title);
     }
     
 }
