@@ -22,7 +22,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         print("did load");
         titleField.text = movie.title;
@@ -34,7 +33,6 @@ class ViewController: UIViewController {
             genreField.text.append("\n");
         }
         print("image "+movie.image);
-        //  let img : UIImage = UIImage(named : movie.image)!;
         imageView.image = UIImage(named : movie.image+".jpg");
     }
     

@@ -19,6 +19,8 @@
 		1E9BFFDD227F10D800C11424 /* harry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1E9BFFD8227F10D800C11424 /* harry.jpg */; };
 		1E9BFFDE227F10D800C11424 /* cars.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1E9BFFD9227F10D800C11424 /* cars.jpg */; };
 		1E9BFFDF227F10D800C11424 /* tangled.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1E9BFFDA227F10D800C11424 /* tangled.jpg */; };
+		1EC79E71227F366D00CEEF64 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC79E70227F366D00CEEF64 /* AddViewController.swift */; };
+		1EC79E73227F384400CEEF64 /* MoviesTableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC79E72227F384400CEEF64 /* MoviesTableProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		1E9BFFD8227F10D800C11424 /* harry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = harry.jpg; path = ../../../../../Documents/harry.jpg; sourceTree = "<group>"; };
 		1E9BFFD9227F10D800C11424 /* cars.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = cars.jpg; path = ../../../../../Documents/cars.jpg; sourceTree = "<group>"; };
 		1E9BFFDA227F10D800C11424 /* tangled.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tangled.jpg; path = ../../../../../Documents/tangled.jpg; sourceTree = "<group>"; };
+		1EC79E70227F366D00CEEF64 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		1EC79E72227F384400CEEF64 /* MoviesTableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTableProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 				1E9BFFCC227F0A9800C11424 /* Info.plist */,
 				1E9BFFD2227F0B0900C11424 /* Movie.swift */,
 				1E9BFFD4227F0C2100C11424 /* TableViewController.swift */,
+				1EC79E70227F366D00CEEF64 /* AddViewController.swift */,
+				1EC79E72227F384400CEEF64 /* MoviesTableProtocol.swift */,
 			);
 			path = MovieListApp;
 			sourceTree = "<group>";
@@ -161,10 +167,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EC79E71227F366D00CEEF64 /* AddViewController.swift in Sources */,
 				1E9BFFC3227F0A9700C11424 /* ViewController.swift in Sources */,
 				1E9BFFC1227F0A9700C11424 /* AppDelegate.swift in Sources */,
 				1E9BFFD3227F0B0900C11424 /* Movie.swift in Sources */,
 				1E9BFFD5227F0C2100C11424 /* TableViewController.swift in Sources */,
+				1EC79E73227F384400CEEF64 /* MoviesTableProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

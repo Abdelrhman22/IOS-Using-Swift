@@ -1,7 +1,14 @@
 import UIKit
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController , MoviesTableProtocol{
     
+    @IBAction func addbtn(_ sender: Any)
+    {
+        print("Add Clickded")
+        let addView = self.storyboard?.instantiateViewController(withIdentifier: "addView") as! AddViewController
+        addView.myProtocol = self
+        self.navigationController?.pushViewController(addView, animated: true)
+    }
     var movies : [Movie]!;
     var viewController : ViewController!;
     //var movieIndex = 0;
@@ -62,7 +69,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return movies.count
     }
     
     
@@ -74,15 +81,15 @@ class TableViewController: UITableViewController {
         
         return cell
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
+    func addMovie(movie : Movie)
+    {
+        movies?.append(movie)
+        self.tableView.reloadData();
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
         viewController = segue.destination as? ViewController;
-        
         viewController.setMovie(mov: movies[(self.tableView.indexPathForSelectedRow?.row)!]);
-        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
