@@ -8,9 +8,9 @@
 
 import UIKit
 
-class AddViewController: UIViewController {
-     var myProtocol:MoviesTableProtocol?;
-    
+class AddViewController: UIViewController
+{
+    var myProtocol:MoviesTableProtocol?
     @IBOutlet weak var titleTF: UITextField!
     @IBOutlet weak var imageTF: UITextField!
     @IBOutlet weak var ratingTF: UITextField!

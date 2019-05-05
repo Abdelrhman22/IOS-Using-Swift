@@ -41,13 +41,12 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
      
-    func setMovie( mov : Movie ){
+    func setMovie( mov : Movie )
+    {
         print("setMovie\n");
         movie = mov;
         print(mov.title);
         print(movie.title);
-        
-        
     }
     
 }

@@ -21,6 +21,11 @@
 		1E9BFFDF227F10D800C11424 /* tangled.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1E9BFFDA227F10D800C11424 /* tangled.jpg */; };
 		1EC79E71227F366D00CEEF64 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC79E70227F366D00CEEF64 /* AddViewController.swift */; };
 		1EC79E73227F384400CEEF64 /* MoviesTableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC79E72227F384400CEEF64 /* MoviesTableProtocol.swift */; };
+		1EC79E79227F471D00CEEF64 /* mach.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1EC79E74227F471C00CEEF64 /* mach.jpg */; };
+		1EC79E7A227F471D00CEEF64 /* dawn.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1EC79E75227F471C00CEEF64 /* dawn.jpg */; };
+		1EC79E7B227F471D00CEEF64 /* district.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1EC79E76227F471C00CEEF64 /* district.jpg */; };
+		1EC79E7C227F471D00CEEF64 /* men.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1EC79E77227F471D00CEEF64 /* men.jpg */; };
+		1EC79E7D227F471D00CEEF64 /* trans.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1EC79E78227F471D00CEEF64 /* trans.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,11 @@
 		1E9BFFDA227F10D800C11424 /* tangled.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tangled.jpg; path = ../../../../../Documents/tangled.jpg; sourceTree = "<group>"; };
 		1EC79E70227F366D00CEEF64 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		1EC79E72227F384400CEEF64 /* MoviesTableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTableProtocol.swift; sourceTree = "<group>"; };
+		1EC79E74227F471C00CEEF64 /* mach.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mach.jpg; path = ../../../../../Documents/mach.jpg; sourceTree = "<group>"; };
+		1EC79E75227F471C00CEEF64 /* dawn.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = dawn.jpg; path = ../../../../../Documents/dawn.jpg; sourceTree = "<group>"; };
+		1EC79E76227F471C00CEEF64 /* district.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = district.jpg; path = ../../../../../Documents/district.jpg; sourceTree = "<group>"; };
+		1EC79E77227F471D00CEEF64 /* men.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = men.jpg; path = ../../../../../Documents/men.jpg; sourceTree = "<group>"; };
+		1EC79E78227F471D00CEEF64 /* trans.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = trans.jpg; path = ../../../../../Documents/trans.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +66,11 @@
 		1E9BFFB4227F0A9700C11424 = {
 			isa = PBXGroup;
 			children = (
+				1EC79E75227F471C00CEEF64 /* dawn.jpg */,
+				1EC79E76227F471C00CEEF64 /* district.jpg */,
+				1EC79E74227F471C00CEEF64 /* mach.jpg */,
+				1EC79E77227F471D00CEEF64 /* men.jpg */,
+				1EC79E78227F471D00CEEF64 /* trans.jpg */,
 				1E9BFFD9227F10D800C11424 /* cars.jpg */,
 				1E9BFFD6227F10D800C11424 /* frozen.jpg */,
 				1E9BFFD8227F10D800C11424 /* harry.jpg */,
@@ -150,13 +165,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E9BFFCB227F0A9800C11424 /* LaunchScreen.storyboard in Resources */,
+				1EC79E7A227F471D00CEEF64 /* dawn.jpg in Resources */,
 				1E9BFFDF227F10D800C11424 /* tangled.jpg in Resources */,
+				1EC79E7B227F471D00CEEF64 /* district.jpg in Resources */,
 				1E9BFFDC227F10D800C11424 /* lion.jpg in Resources */,
 				1E9BFFDD227F10D800C11424 /* harry.jpg in Resources */,
+				1EC79E7C227F471D00CEEF64 /* men.jpg in Resources */,
+				1EC79E79227F471D00CEEF64 /* mach.jpg in Resources */,
 				1E9BFFDE227F10D800C11424 /* cars.jpg in Resources */,
 				1E9BFFDB227F10D800C11424 /* frozen.jpg in Resources */,
 				1E9BFFC8227F0A9800C11424 /* Assets.xcassets in Resources */,
 				1E9BFFC6227F0A9700C11424 /* Main.storyboard in Resources */,
+				1EC79E7D227F471D00CEEF64 /* trans.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

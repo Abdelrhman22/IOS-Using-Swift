@@ -15,42 +15,42 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let m1 = Movie();
-        m1.title = "Harry Potter";
-        m1.rating = 10.0;
-        m1.releaseDate = 2000;
-        m1.genre = ["action","fantasy"];
-        m1.image = "harry";
+        let movie1 = Movie();
+        movie1.title = "Dawn of the Planet of the Apes";
+        movie1.rating = 8.3;
+        movie1.releaseDate = 2014;
+        movie1.genre = ["Action","Drama" , "Sci-Fi"];
+        movie1.image = "dawn";
         
-        let m2 = Movie();
-        m2.title = "Lion King";
-        m2.rating = 9.5;
-        m2.releaseDate = 1993;
-        m2.genre = ["action","fantasy"];
-        m2.image = "lion";
+        let movie2 = Movie();
+        movie2.title = "District 9";
+        movie2.rating = 8.0;
+        movie2.releaseDate = 2009;
+        movie2.genre = ["Action", "Sci-Fi", "Thriller"];
+        movie2.image = "district";
         
-        let m3 = Movie();
-        m3.title = "frozen";
-        m3.rating = 9.0;
-        m3.releaseDate = 2015;
-        m3.genre = ["action","fantasy"];
-        m3.image = "frozen";
+        let movie3 = Movie();
+        movie3.title = "Transformers: Age of Extinction";
+        movie3.rating = 6.3;
+        movie3.releaseDate = 2014;
+        movie3.genre = ["action","fantasy"];
+        movie3.image = "trans";
         
-        let m4 = Movie();
-        m4.title = "Tangled";
-        m4.rating = 10.0;
-        m4.releaseDate = 2013;
-        m4.genre = ["action","fantasy"];
-        m4.image = "tangled";
+        let movie4 = Movie();
+        movie4.title = "X-Men: Days of Future Past";
+        movie4.rating = 10.0;
+        movie4.releaseDate = 2013;
+        movie4.genre = ["Action", "Sci-Fi", "Thriller"];
+        movie4.image = "men";
         
-        let m5 = Movie();
-        m5.title = "Cars3";
-        m5.rating = 8.0;
-        m5.releaseDate = 2017;
-        m5.genre = ["action","fantasy"];
-        m5.image = "cars";
+        let movie5 = Movie();
+        movie5.title = "The Machinist";
+        movie5.rating = 8.0;
+        movie5.releaseDate = 2017;
+        movie5.genre = ["Drama", "Thriller"];
+        movie5.image = "mach";
         
-        movies = [m1,m2,m3,m4,m5];
+        movies = [movie1,movie2,movie3,movie4,movie5];
         
         viewController = ViewController();
     }
@@ -77,8 +77,8 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         // Configure the cell...
-        cell.textLabel?.text = movies[indexPath.row].title;
-        
+        cell.textLabel?.text = movies[indexPath.row].title
+        cell.imageView?.image=UIImage(named: movies[indexPath.row].image)
         return cell
     }
     func addMovie(movie : Movie)
@@ -91,7 +91,9 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         viewController = segue.destination as? ViewController;
         viewController.setMovie(mov: movies[(self.tableView.indexPathForSelectedRow?.row)!]);
     }
-    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //  movieIndex = indexPath.row;
     }
