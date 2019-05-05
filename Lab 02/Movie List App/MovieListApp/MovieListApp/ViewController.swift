@@ -9,12 +9,50 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var titleField: UILabel!
+    @IBOutlet weak var ratingField: UILabel!
+    
+    @IBOutlet weak var yearField: UILabel!
+    @IBOutlet weak var genreField: UITextView!
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
+    var movie : Movie = Movie();
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        print("did load");
+        titleField.text = movie.title;
+        ratingField.text = String(movie.rating);
+        yearField.text = String(movie.releaseDate);
+        genreField.text="";
+        for x in 0..<(movie.genre?.count)!{
+            genreField.text.append((movie.genre?[x])!);
+            genreField.text.append("\n");
+        }
+        print("image "+movie.image);
+        //  let img : UIImage = UIImage(named : movie.image)!;
+        imageView.image = UIImage(named : movie.image+".jpg");
     }
-
-
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func setMovie( mov : Movie ){
+        print("setMovie\n");
+        movie = mov;
+        print(mov.title);
+        print(movie.title);
+        
+        
+    }
+    
 }
+
+
 
