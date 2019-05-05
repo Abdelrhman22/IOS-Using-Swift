@@ -48,7 +48,6 @@
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="CalcButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MCK-Dx-Zwk"/>
                                     <action selector="empButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xSj-MC-x3V"/>
                                 </connections>
                             </button>
@@ -60,7 +59,6 @@
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="CalcButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Puo-Tf-mdO"/>
                                     <action selector="managerButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vDc-DN-4mD"/>
                                 </connections>
                             </button>

@@ -6,7 +6,7 @@ class Manager: Person
     {
         super.init(sal: sal)
     }
-    
+     
     override func getSalary() -> Double
     {
         return salary*2.0

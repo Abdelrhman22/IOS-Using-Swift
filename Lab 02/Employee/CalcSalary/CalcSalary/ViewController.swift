@@ -9,14 +9,33 @@ class ViewController: UIViewController
     @IBAction func empButton(_ sender: UIButton)
     {
         let salStr = salaryTF.text!
-        //var sall = Double(salStr)
-        //var emp = Employee(sal: sall)
-        //var output = emp.getSalary()
-        print("Emp Sal ",salStr)
+        if(!salStr.isEmpty)
+        { 
+            let sall = Double(salStr)
+            let emp = Employee(sal: sall!)
+            let output = emp.getSalary()
+            print("Emp Sal ",output)
+            empLabel.text = String(output)
+        }
+        else{
+            empLabel.text = "Empty Value !"
+        }
     }
     @IBAction func managerButton(_ sender: UIButton)
     {
-        
+         let salStr = salaryTF.text!
+        if(!salStr.isEmpty)
+        {
+            let sall = Double(salStr)
+            let manag = Manager(sal: sall!)
+            let output = manag.getSalary()
+            print("Manag Sal ",output)
+            managLabel.text = String(output)
+        }
+        else
+        {
+             managLabel.text = "Empty Value !"
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()

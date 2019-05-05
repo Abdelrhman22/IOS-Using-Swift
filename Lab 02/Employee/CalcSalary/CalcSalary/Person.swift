@@ -2,7 +2,7 @@ import UIKit
 
 class Person: NSObject
 {
-    var salary :Double
+    var salary :Double 
     init(sal :Double) {
         self.salary = sal
     }
