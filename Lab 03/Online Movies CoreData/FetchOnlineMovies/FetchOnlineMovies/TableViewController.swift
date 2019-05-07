@@ -12,11 +12,11 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
     //var movies : [Movie]!;
     var movies : [NSManagedObject]!;
     var viewController : ViewController!;
-    //var movieIndex = 0;
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewController = ViewController();
-        //getMovies()
+        getMovies()  // fetch movies online
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -56,24 +56,24 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         //cell.imageView?.image=UIImage(named: movies[indexPath.row].image)
         return cell
     }
-    func addMovie(movie : Movie)
+    func addMovie(movie movieAdded : Movie)
     {
         let appDeleget = UIApplication.shared.delegate as! AppDelegate
         let managedConetext = appDeleget.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Movies",in: managedConetext)
-        let coreMovie = NSManagedObject(entity: entity!,insertInto: managedConetext)
-        coreMovie.setValue(movie.title , forKey: "title")
-        coreMovie.setValue(movie.image , forKey: "image")
-        coreMovie.setValue(movie.releaseDate , forKey: "year")
-        coreMovie.setValue(movie.rating , forKey: "rating")
-        coreMovie.setValue(movie.genre , forKey: "genre")
+        let movie = NSManagedObject(entity: entity!,insertInto: managedConetext)
+        movie.setValue(movieAdded.title , forKey: "title")
+        movie.setValue(movieAdded.image , forKey: "image")
+        movie.setValue(movieAdded.releaseDate , forKey: "year")
+        movie.setValue(movieAdded.rating , forKey: "rating")
+        movie.setValue(movieAdded.genre , forKey: "genre")
         do{
             try managedConetext.save()
             print("movie saved")
         }catch let error as NSError{
             print(error)
         }
-        movies.append(coreMovie)
+        movies.append(movie)
         self.tableView.reloadData()
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -95,7 +95,7 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //  movieIndex = indexPath.row;
     }
-    /*
+    
     func getMovies(){
         
         let url = URL(string: "https://api.androidhive.info/json/movies.json")
@@ -106,15 +106,29 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
                 var json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! Array<Dictionary<String,Any>>
                 for index in 0..<json.count{
                     var object = json[index]
-                    let movieObject = Movie()
-                    movieObject.title = object["title"]! as! String
-                    movieObject.rating = (object["rating"] as? NSNumber)?.floatValue ?? 0
+                    //let movieObject = Movie()
+                    //movieObject.title = object["title"]! as! String
+                    //movieObject.rating = (object["rating"] as? NSNumber)?.floatValue ?? 0
                     //object["rating"]! as! Float
-                    movieObject.releaseDate = object["releaseYear"]! as! Int
-                    movieObject.genre = (object["genre"]! as! [String])
-                    movieObject.image = object["image"]! as! String
-                    
-                    self.movies?.append(movieObject)
+                    //movieObject.releaseDate = object["releaseYear"]! as! Int
+                    //movieObject.genre = (object["genre"]! as! [String])
+                    //movieObject.image = object["image"]! as! String
+                    let appDeleget = UIApplication.shared.delegate as! AppDelegate
+                    let managedConetext = appDeleget.persistentContainer.viewContext
+                    let entity = NSEntityDescription.entity(forEntityName: "Movies",in:managedConetext)
+                    let movie = NSManagedObject(entity: entity!,insertInto: managedConetext)
+                    movie.setValue(object["title"]! as! String , forKey: "title")
+                    movie.setValue(object["image"]! as! String, forKey: "image")
+                    movie.setValue(object["releaseYear"]! as! Int, forKey: "year")
+                    movie.setValue((object["rating"] as? NSNumber)?.floatValue ?? 0 , forKey: "rating")
+                    movie.setValue( (object["genre"]! as! [String]), forKey: "genre")
+                    do{
+                        try managedConetext.save()
+                        print("movie saved")
+                    }catch let error as NSError{
+                        print(error)
+                    }
+                    self.movies.append(movie)
                     DispatchQueue.main.async
                     {
                        self.tableView.reloadData()
@@ -129,5 +143,5 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         task.resume()
         
     }
- */
+ 
 }
