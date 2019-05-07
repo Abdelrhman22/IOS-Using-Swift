@@ -10,25 +10,26 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         addView.myProtocol = self
         self.navigationController?.pushViewController(addView, animated: true)
     }
-    //var movies : [Movie]!;
-    var movies : [NSManagedObject]!;
+    var movies : [NSManagedObject]!;     // movies array  of type NSManagedObject to deal with CoreData
     var viewController : ViewController!;
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         viewController = ViewController();
-        getMovies()  // fetch movies online
+        getMovies()  // fetch movies online and Save them .
     }
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) // show saved movies , which fetched and saved from API
+    {
         super.viewWillAppear(animated)
         let appDeleget = UIApplication.shared.delegate as! AppDelegate
-        
         let managedConetext = appDeleget.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Movies")
-        do{
-            movies = try managedConetext.fetch(fetchRequest)
+        do
+        {
+            movies = try managedConetext.fetch(fetchRequest) // fetch
         }catch{
-            print("error")
+            print("viewWillAppear ...Error while fetching movies ")
         }
     }
     override func didReceiveMemoryWarning() {
@@ -37,8 +38,8 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
     }
     
     // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int
+    {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
@@ -52,9 +53,8 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        // Configure the cell...
         cell.textLabel?.text = (movies[indexPath.row].value(forKey: "title") as! String);
-        //cell.imageView?.image=UIImage(named: movies[indexPath.row].image)
+        
         cell.imageView?.sd_setImage(with: URL(string: (movies[indexPath.row].value(forKey: "image") as! String)), placeholderImage: UIImage(named: "placeholder.jpg"))
         return cell
     }
@@ -69,7 +69,8 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         movie.setValue(movieAdded.releaseDate , forKey: "releaseDate")
         movie.setValue(movieAdded.rating , forKey: "rating")
         movie.setValue(movieAdded.genre , forKey: "genre")
-        do{
+        do
+        {
             try managedConetext.save()
         }catch let error as NSError{
             print(error)
@@ -81,14 +82,14 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
     {
         viewController = segue.destination as? ViewController;
         
-        let myMovie: Movie = Movie()
-        myMovie.title = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "title") as! String
-        myMovie.image = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "image") as! String
-        myMovie.rating = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "rating") as! Float
-        myMovie.releaseDate = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "releaseDate") as! Int
-        myMovie.genre = (movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "genre") as! [String])
+        let clickedMovie: Movie = Movie()
+        clickedMovie.title = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "title") as! String
+        clickedMovie.image = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "image") as! String
+        clickedMovie.rating = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "rating") as! Float
+        clickedMovie.releaseDate = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "releaseDate") as! Int
+        clickedMovie.genre = (movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "genre") as! [String])
         
-        viewController.setMovie(mov: myMovie);
+        viewController.setMovie(mov: clickedMovie);
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
@@ -118,7 +119,7 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
                     movie.setValue( (object["genre"]! as! [String]), forKey: "genre")
                     do{
                         try managedConetext.save()
-                        print("movie saved")
+                        print("Fetched new Movie",object["title"]! as! String)
                     }catch let error as NSError{
                         print(error)
                     }
