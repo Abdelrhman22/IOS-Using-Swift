@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreData
 class AddViewController: UIViewController
 {
     var myProtocol:MoviesTableProtocol?

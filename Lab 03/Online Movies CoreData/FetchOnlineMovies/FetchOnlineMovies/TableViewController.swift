@@ -1,5 +1,5 @@
 import UIKit
-
+import CoreData
 class TableViewController: UITableViewController , MoviesTableProtocol{
     
     @IBAction func addbtn(_ sender: Any)
@@ -9,56 +9,27 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         addView.myProtocol = self
         self.navigationController?.pushViewController(addView, animated: true)
     }
-    var movies : [Movie]!;
+    //var movies : [Movie]!;
+    var movies : [NSManagedObject]!;
     var viewController : ViewController!;
     //var movieIndex = 0;
     override func viewDidLoad() {
         super.viewDidLoad()
         viewController = ViewController();
-        movies = []
-        /*
-        let movie1 = Movie();
-        movie1.title = "Dawn of the Planet of the Apes";
-        movie1.rating = 8.3;
-        movie1.releaseDate = 2014;
-        movie1.genre = ["Action","Drama" , "Sci-Fi"];
-        movie1.image = "dawn";
-        
-        let movie2 = Movie();
-        movie2.title = "District 9";
-        movie2.rating = 8.0;
-        movie2.releaseDate = 2009;
-        movie2.genre = ["Action", "Sci-Fi", "Thriller"];
-        movie2.image = "district";
-        
-        let movie3 = Movie();
-        movie3.title = "Transformers: Age of Extinction";
-        movie3.rating = 6.3;
-        movie3.releaseDate = 2014;
-        movie3.genre = ["action","fantasy"];
-        movie3.image = "trans";
-        
-        let movie4 = Movie();
-        movie4.title = "X-Men: Days of Future Past";
-        movie4.rating = 10.0;
-        movie4.releaseDate = 2013;
-        movie4.genre = ["Action", "Sci-Fi", "Thriller"];
-        movie4.image = "men";
-        
-        let movie5 = Movie();
-        movie5.title = "The Machinist";
-        movie5.rating = 8.0;
-        movie5.releaseDate = 2017;
-        movie5.genre = ["Drama", "Thriller"];
-        movie5.image = "mach";
-        
-        movies = [movie1,movie2,movie3,movie4,movie5];
-        */
-        getMovies()
-        
-       
+        //getMovies()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let appDeleget = UIApplication.shared.delegate as! AppDelegate
+        
+        let managedConetext = appDeleget.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Movies")
+        do{
+            movies = try managedConetext.fetch(fetchRequest)
+        }catch{
+            print("error")
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -81,19 +52,42 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         // Configure the cell...
-        cell.textLabel?.text = movies[indexPath.row].title
+        cell.textLabel?.text = (movies[indexPath.row].value(forKey: "title") as! String);
         //cell.imageView?.image=UIImage(named: movies[indexPath.row].image)
         return cell
     }
     func addMovie(movie : Movie)
     {
-        movies?.append(movie)
-        self.tableView.reloadData();
+        let appDeleget = UIApplication.shared.delegate as! AppDelegate
+        let managedConetext = appDeleget.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Movies",in: managedConetext)
+        let coreMovie = NSManagedObject(entity: entity!,insertInto: managedConetext)
+        coreMovie.setValue(movie.title , forKey: "title")
+        coreMovie.setValue(movie.image , forKey: "image")
+        coreMovie.setValue(movie.releaseDate , forKey: "year")
+        coreMovie.setValue(movie.rating , forKey: "rating")
+        coreMovie.setValue(movie.genre , forKey: "genre")
+        do{
+            try managedConetext.save()
+            print("movie saved")
+        }catch let error as NSError{
+            print(error)
+        }
+        movies.append(coreMovie)
+        self.tableView.reloadData()
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         viewController = segue.destination as? ViewController;
-        viewController.setMovie(mov: movies[(self.tableView.indexPathForSelectedRow?.row)!]);
+        
+        let myMovie: Movie = Movie()
+        myMovie.title = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "title") as! String
+        myMovie.image = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "image") as! String
+        myMovie.rating = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "rating") as! Float
+        myMovie.releaseDate = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "year") as! Int
+        myMovie.genre = (movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "genre") as! [String])
+        
+        viewController.setMovie(mov: myMovie);
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
@@ -101,7 +95,7 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //  movieIndex = indexPath.row;
     }
-    
+    /*
     func getMovies(){
         
         let url = URL(string: "https://api.androidhive.info/json/movies.json")
@@ -135,4 +129,5 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         task.resume()
         
     }
+ */
 }
