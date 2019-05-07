@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import SDWebImage
 class TableViewController: UITableViewController , MoviesTableProtocol{
     
     @IBAction func addbtn(_ sender: Any)
@@ -54,6 +55,7 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         // Configure the cell...
         cell.textLabel?.text = (movies[indexPath.row].value(forKey: "title") as! String);
         //cell.imageView?.image=UIImage(named: movies[indexPath.row].image)
+        cell.imageView?.sd_setImage(with: URL(string: (movies[indexPath.row].value(forKey: "image") as! String)), placeholderImage: UIImage(named: "placeholder.jpg"))
         return cell
     }
     func addMovie(movie movieAdded : Movie)
@@ -64,12 +66,11 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         let movie = NSManagedObject(entity: entity!,insertInto: managedConetext)
         movie.setValue(movieAdded.title , forKey: "title")
         movie.setValue(movieAdded.image , forKey: "image")
-        movie.setValue(movieAdded.releaseDate , forKey: "year")
+        movie.setValue(movieAdded.releaseDate , forKey: "releaseDate")
         movie.setValue(movieAdded.rating , forKey: "rating")
         movie.setValue(movieAdded.genre , forKey: "genre")
         do{
             try managedConetext.save()
-            print("movie saved")
         }catch let error as NSError{
             print(error)
         }
@@ -84,7 +85,7 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         myMovie.title = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "title") as! String
         myMovie.image = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "image") as! String
         myMovie.rating = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "rating") as! Float
-        myMovie.releaseDate = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "year") as! Int
+        myMovie.releaseDate = movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "releaseDate") as! Int
         myMovie.genre = (movies[(self.tableView.indexPathForSelectedRow?.row)!].value(forKey: "genre") as! [String])
         
         viewController.setMovie(mov: myMovie);
@@ -106,20 +107,13 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
                 var json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! Array<Dictionary<String,Any>>
                 for index in 0..<json.count{
                     var object = json[index]
-                    //let movieObject = Movie()
-                    //movieObject.title = object["title"]! as! String
-                    //movieObject.rating = (object["rating"] as? NSNumber)?.floatValue ?? 0
-                    //object["rating"]! as! Float
-                    //movieObject.releaseDate = object["releaseYear"]! as! Int
-                    //movieObject.genre = (object["genre"]! as! [String])
-                    //movieObject.image = object["image"]! as! String
                     let appDeleget = UIApplication.shared.delegate as! AppDelegate
                     let managedConetext = appDeleget.persistentContainer.viewContext
                     let entity = NSEntityDescription.entity(forEntityName: "Movies",in:managedConetext)
                     let movie = NSManagedObject(entity: entity!,insertInto: managedConetext)
                     movie.setValue(object["title"]! as! String , forKey: "title")
                     movie.setValue(object["image"]! as! String, forKey: "image")
-                    movie.setValue(object["releaseYear"]! as! Int, forKey: "year")
+                    movie.setValue(object["releaseYear"]! as! Int, forKey: "releaseDate")
                     movie.setValue((object["rating"] as? NSNumber)?.floatValue ?? 0 , forKey: "rating")
                     movie.setValue( (object["genre"]! as! [String]), forKey: "genre")
                     do{
