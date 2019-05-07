@@ -138,5 +138,24 @@ class TableViewController: UITableViewController , MoviesTableProtocol{
         task.resume()
         
     }
- 
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let managerContext = appDelegate.persistentContainer.viewContext
+            managerContext.delete(movies[indexPath.row])
+            // Delete the row from the data source
+            
+            movies.remove(at: indexPath.row)
+            do{
+                try managerContext.save()
+                
+            }catch{
+                print("Error")
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
 }
